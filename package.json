@@ -16,7 +16,9 @@
     },
     "files": [
       "main.js",
-      "index.html"
+      "index.html",
+      "styles.css",
+      "script.js"
     ],
     "nsis": {
       "oneClick": false,
