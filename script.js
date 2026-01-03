@@ -191,9 +191,7 @@ function createRipple(button) {
   ripple.style.height = size + "px";
   ripple.style.left = centerX - size / 2 + "px";
   ripple.style.top = centerY - size / 2 + "px";
-  ripple.style.background = "rgba(255, 255, 255, 0.6)";
-  // ripple.style.background = selectedGradient;
-  // ripple.style.opacity = 0.5;
+  ripple.style.background = selectedGradient;
 
   // 버튼이 아닌 버튼 컨테이너에 추가
   container.appendChild(ripple);
