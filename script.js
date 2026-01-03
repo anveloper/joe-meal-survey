@@ -139,7 +139,7 @@ function vote(choice, event) {
   clickedButton.classList.add("voted");
 
   // 물결 효과 생성
-  createRipple(event, clickedButton);
+  createRipple(clickedButton);
 
   // 애니메이션 종료 후 클래스 제거
   setTimeout(() => {
@@ -159,29 +159,37 @@ function vote(choice, event) {
 }
 
 // 물결 효과 생성
-function createRipple(event, button) {
+function createRipple(button) {
   const ripple = document.createElement("span");
   ripple.classList.add("ripple");
 
-  // 버튼 내에서 클릭한 위치 계산
-  const rect = button.getBoundingClientRect();
-  const x = event.clientX - rect.left;
-  const y = event.clientY - rect.top;
+  // 버튼과 컨테이너의 위치 가져오기
+  const buttonRect = button.getBoundingClientRect();
+  const container = button.parentElement;
+  const containerRect = container.getBoundingClientRect();
 
-  // 가장 먼 코너까지의 거리 계산 (원이 전체를 덮을 수 있도록)
-  const size = Math.max(rect.width, rect.height) * 2;
+  // 버튼 중앙 위치 계산 (컨테이너 기준)
+  const centerX = buttonRect.left - containerRect.left + buttonRect.width / 2;
+  const centerY = buttonRect.top - containerRect.top + buttonRect.height / 2;
+
+  // 물결 크기 설정
+  const size = Math.max(buttonRect.width, buttonRect.height) * 2.5;
 
   ripple.style.width = size + "px";
   ripple.style.height = size + "px";
-  ripple.style.left = x - size / 2 + "px";
-  ripple.style.top = y - size / 2 + "px";
+  ripple.style.left = centerX - size / 2 + "px";
+  ripple.style.top = centerY - size / 2 + "px";
+  ripple.style.background = "rgba(255, 255, 255, 0.6)";
+  // ripple.style.background = selectedGradient;
+  // ripple.style.opacity = 0.5;
 
-  button.appendChild(ripple);
+  // 버튼이 아닌 버튼 컨테이너에 추가
+  container.appendChild(ripple);
 
   // 애니메이션 종료 후 제거
   setTimeout(() => {
     ripple.remove();
-  }, 800);
+  }, 600);
 }
 
 // 비밀번호 모달 표시
