@@ -218,6 +218,7 @@ body {
 
 .vote-screen h2 {
   color: #333;
+  margin-top: 3vh;
   margin-bottom: 3vh;
   font-size: clamp(28px, 6vmin, 56px);
   line-height: 1.5;
