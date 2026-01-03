@@ -84,6 +84,12 @@ function resetAllData() {
   // 배경색 초기화
   document.body.style.background = selectedGradient;
 
+  // 시작하기 버튼 색상 초기화
+  const startButton = document.querySelector(".btn-start");
+  if (startButton) {
+    startButton.style.background = selectedGradient;
+  }
+
   // 입력 필드 초기화
   document.getElementById("menuNameInput").value = "";
   document.getElementById("passwordInput").value = "";
@@ -232,6 +238,13 @@ function checkPassword() {
 function changeBackgroundColor(gradient) {
   selectedGradient = gradient;
   document.body.style.background = gradient;
+
+  // 시작하기 버튼 색상도 변경
+  const startButton = document.querySelector(".btn-start");
+  if (startButton) {
+    startButton.style.background = gradient;
+  }
+
   // localStorage에 저장 (이미 시작된 경우에만)
   const isStarted = localStorage.getItem(STORAGE_KEYS.isStarted);
   if (isStarted === "true") {
@@ -262,6 +275,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // 색상 선택 기능 초기화
   setupColorPicker();
+
+  // 시작하기 버튼 초기 색상 설정
+  const startButton = document.querySelector(".btn-start");
+  if (startButton) {
+    startButton.style.background = selectedGradient;
+  }
 
   // 비밀번호 입력 엔터키 이벤트
   document.getElementById("passwordCheck").addEventListener("keypress", function (e) {
