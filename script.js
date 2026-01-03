@@ -138,6 +138,9 @@ function vote(choice, event) {
   const clickedButton = event.target;
   clickedButton.classList.add("voted");
 
+  // 물결 효과 생성
+  createRipple(event, clickedButton);
+
   // 애니메이션 종료 후 클래스 제거
   setTimeout(() => {
     clickedButton.classList.remove("voted");
@@ -145,12 +148,40 @@ function vote(choice, event) {
 
   // 감사 메시지 표시
   const thankYou = document.getElementById("thankYou");
-  thankYou.style.display = "block";
+  if (thankYou) {
+    thankYou.style.display = "block";
 
-  // 1.5초 후 메시지 숨기기
+    // 1.5초 후 메시지 숨기기
+    setTimeout(() => {
+      thankYou.style.display = "none";
+    }, 1500);
+  }
+}
+
+// 물결 효과 생성
+function createRipple(event, button) {
+  const ripple = document.createElement("span");
+  ripple.classList.add("ripple");
+
+  // 버튼 내에서 클릭한 위치 계산
+  const rect = button.getBoundingClientRect();
+  const x = event.clientX - rect.left;
+  const y = event.clientY - rect.top;
+
+  // 가장 먼 코너까지의 거리 계산 (원이 전체를 덮을 수 있도록)
+  const size = Math.max(rect.width, rect.height) * 2;
+
+  ripple.style.width = size + "px";
+  ripple.style.height = size + "px";
+  ripple.style.left = x - size / 2 + "px";
+  ripple.style.top = y - size / 2 + "px";
+
+  button.appendChild(ripple);
+
+  // 애니메이션 종료 후 제거
   setTimeout(() => {
-    thankYou.style.display = "none";
-  }, 1500);
+    ripple.remove();
+  }, 800);
 }
 
 // 비밀번호 모달 표시
