@@ -43,12 +43,15 @@ function loadFromLocalStorage() {
 
     // 화면 전환
     document.getElementById("setupScreen").style.display = "none";
-    document.getElementById("voteScreen").style.display = "block";
+    document.getElementById("voteScreen").style.display = "flex";
     document.getElementById("resultsIcon").style.display = "flex";
     document.getElementById("menuNameDisplay").textContent = menuName;
 
     // 배경색 적용
     document.body.style.background = selectedGradient;
+
+    // 전체 화면 모드로 전환
+    document.querySelector(".container").classList.add("fullscreen");
 
     // 저장된 색상에 맞는 버튼에 active 클래스 추가
     const colorButtons = document.querySelectorAll(".color-btn");
@@ -99,6 +102,9 @@ function resetAllData() {
   document.getElementById("voteScreen").style.display = "none";
   document.getElementById("setupScreen").style.display = "block";
   document.getElementById("resultsIcon").style.display = "none";
+
+  // 전체 화면 모드 해제
+  document.querySelector(".container").classList.remove("fullscreen");
 }
 
 // 초기 설정
@@ -118,9 +124,12 @@ function startSurvey() {
   saveToLocalStorage();
 
   document.getElementById("setupScreen").style.display = "none";
-  document.getElementById("voteScreen").style.display = "block";
+  document.getElementById("voteScreen").style.display = "flex";
   document.getElementById("resultsIcon").style.display = "flex";
   document.getElementById("menuNameDisplay").textContent = menuName;
+
+  // 전체 화면 모드로 전환
+  document.querySelector(".container").classList.add("fullscreen");
 }
 
 // 투표하기
@@ -279,10 +288,16 @@ function showResults() {
 
   document.getElementById("voteScreen").style.display = "none";
   document.getElementById("resultsScreen").style.display = "block";
+
+  // 전체 화면 모드 해제
+  document.querySelector(".container").classList.remove("fullscreen");
 }
 
 // 투표 화면으로 돌아가기
 function backToVote() {
   document.getElementById("resultsScreen").style.display = "none";
-  document.getElementById("voteScreen").style.display = "block";
+  document.getElementById("voteScreen").style.display = "flex";
+
+  // 전체 화면 모드로 전환
+  document.querySelector(".container").classList.add("fullscreen");
 }
