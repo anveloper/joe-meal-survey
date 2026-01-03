@@ -26,7 +26,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  transition: all 0.3s ease;
+  transition: all 0.5s ease;
 }
 
 /* 투표 화면일 때만 전체 화면 */
@@ -235,35 +235,17 @@ body {
   flex: 1;
   align-items: center;
   justify-content: center;
+  flex-direction: column; /* 기본값: 위아래 배치 */
 }
 
-/* 가로가 긴 화면 (landscape) - 좌우 배치 */
-@media (min-aspect-ratio: 1/1) {
-  .vote-buttons {
-    flex-direction: row;
-  }
-
-  .vote-btn {
-    width: 40vw;
-    height: 50vh;
-    max-width: 45%;
-  }
-}
-
-/* 세로가 긴 화면 (portrait) - 상하 배치 */
-@media (max-aspect-ratio: 1/1) {
-  .vote-buttons {
-    flex-direction: column;
-  }
-
-  .vote-btn {
-    width: 80vw;
-    height: 35vh;
-    max-width: 90%;
-  }
-}
-
+/* 기본 버튼 스타일 */
 .vote-btn {
+  /* 기본 크기 (세로가 가로보다 크거나 같을 때 - 위아래 배치) */
+  width: 80vw;
+  height: 35vh;
+  max-width: 90%;
+
+  /* 스타일 */
   flex: none;
   padding: 0;
   font-size: clamp(24px, 5vmin, 48px);
@@ -278,6 +260,19 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+/* 가로가 세로보다 확실히 긴 화면만 좌우 배치 (가로:세로 = 1.2:1 이상) */
+@media (min-aspect-ratio: 6/5) {
+  .vote-buttons {
+    flex-direction: row;
+  }
+
+  .vote-btn {
+    width: 40vw;
+    height: 50vh;
+    max-width: 45%;
+  }
 }
 
 .vote-btn.yes {
@@ -376,6 +371,36 @@ body {
     opacity: 1;
     transform: translateX(-50%) translateY(0) scale(1);
   }
+}
+
+/* 전체화면 버튼 */
+.fullscreen-icon {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  width: 40px;
+  height: 40px;
+  background: rgba(102, 126, 234, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s;
+  opacity: 0.6;
+  z-index: 1000;
+}
+
+.fullscreen-icon:hover {
+  opacity: 1;
+  transform: scale(1.1);
+  background: rgba(102, 126, 234, 0.4);
+}
+
+.fullscreen-icon svg {
+  width: 20px;
+  height: 20px;
+  fill: #667eea;
 }
 
 /* 결과보기 버튼 */

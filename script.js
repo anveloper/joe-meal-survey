@@ -45,6 +45,7 @@ function loadFromLocalStorage() {
     document.getElementById("setupScreen").style.display = "none";
     document.getElementById("voteScreen").style.display = "flex";
     document.getElementById("resultsIcon").style.display = "flex";
+    document.getElementById("fullscreenIcon").style.display = "flex";
     document.getElementById("menuNameDisplay").textContent = menuName;
 
     // 배경색 적용
@@ -102,6 +103,7 @@ function resetAllData() {
   document.getElementById("voteScreen").style.display = "none";
   document.getElementById("setupScreen").style.display = "block";
   document.getElementById("resultsIcon").style.display = "none";
+  document.getElementById("fullscreenIcon").style.display = "none";
 
   // 전체 화면 모드 해제
   document.querySelector(".container").classList.remove("fullscreen");
@@ -126,6 +128,7 @@ function startSurvey() {
   document.getElementById("setupScreen").style.display = "none";
   document.getElementById("voteScreen").style.display = "flex";
   document.getElementById("resultsIcon").style.display = "flex";
+  document.getElementById("fullscreenIcon").style.display = "flex";
   document.getElementById("menuNameDisplay").textContent = menuName;
 
   // 전체 화면 모드로 전환
@@ -301,3 +304,34 @@ function backToVote() {
   // 전체 화면 모드로 전환
   document.querySelector(".container").classList.add("fullscreen");
 }
+
+// 브라우저 전체화면 토글
+function toggleFullscreen() {
+  if (!document.fullscreenElement) {
+    // 전체화면 진입
+    document.documentElement.requestFullscreen().catch((err) => {
+      console.error("전체화면 요청 실패:", err);
+    });
+  } else {
+    // 전체화면 나가기
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    }
+  }
+}
+
+// 전체화면 상태 변경 감지
+document.addEventListener("fullscreenchange", function () {
+  const expandIcon = document.getElementById("expandIcon");
+  const compressIcon = document.getElementById("compressIcon");
+
+  if (document.fullscreenElement) {
+    // 전체화면 모드
+    expandIcon.style.display = "none";
+    compressIcon.style.display = "block";
+  } else {
+    // 일반 모드
+    expandIcon.style.display = "block";
+    compressIcon.style.display = "none";
+  }
+});
