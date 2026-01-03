@@ -110,6 +110,7 @@ function resetAllData() {
   document.getElementById("setupScreen").style.display = "block";
   document.getElementById("resultsIcon").style.display = "none";
   document.getElementById("fullscreenIcon").style.display = "none";
+  document.getElementById("screenshotIcon").style.display = "none";
 
   // 전체 화면 모드 해제
   document.querySelector(".container").classList.remove("fullscreen");
@@ -308,6 +309,7 @@ function showResults() {
 
   document.getElementById("voteScreen").style.display = "none";
   document.getElementById("resultsScreen").style.display = "block";
+  document.getElementById("screenshotIcon").style.display = "flex";
 
   // 전체 화면 모드 해제
   document.querySelector(".container").classList.remove("fullscreen");
@@ -317,6 +319,7 @@ function showResults() {
 function backToVote() {
   document.getElementById("resultsScreen").style.display = "none";
   document.getElementById("voteScreen").style.display = "flex";
+  document.getElementById("screenshotIcon").style.display = "none";
 
   // 전체 화면 모드로 전환
   document.querySelector(".container").classList.add("fullscreen");
@@ -352,3 +355,41 @@ document.addEventListener("fullscreenchange", function () {
     compressIcon.style.display = "none";
   }
 });
+
+// 스크린샷 저장
+function saveScreenshot() {
+  // 스크린샷 아이콘 임시로 숨김
+  const screenshotIcon = document.getElementById("screenshotIcon");
+  screenshotIcon.style.display = "none";
+
+  // 결과 화면 캡처
+  const resultsScreen = document.getElementById("resultsScreen");
+
+  html2canvas(resultsScreen, {
+    backgroundColor: "#ffffff",
+    scale: 2, // 고해상도
+  }).then((canvas) => {
+    // 날짜 형식: YYYYMMDD
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, "0");
+    const day = String(today.getDate()).padStart(2, "0");
+    const dateStr = `${year}${month}${day}`;
+
+    // 파일명: 날짜-메뉴명-Y숫자-N숫자.png
+    const filename = `${dateStr}-${menuName}-Y${yesVotes}-N${noVotes}.png`;
+
+    // 다운로드
+    canvas.toBlob((blob) => {
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.download = filename;
+      link.href = url;
+      link.click();
+      URL.revokeObjectURL(url);
+
+      // 스크린샷 아이콘 다시 표시
+      screenshotIcon.style.display = "flex";
+    });
+  });
+}

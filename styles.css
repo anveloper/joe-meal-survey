@@ -381,6 +381,36 @@ body {
   }
 }
 
+/* 스크린샷 저장 버튼 */
+.screenshot-icon {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  width: 40px;
+  height: 40px;
+  background: rgba(102, 126, 234, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s;
+  opacity: 0.6;
+  z-index: 1000;
+}
+
+.screenshot-icon:hover {
+  opacity: 1;
+  transform: scale(1.1);
+  background: rgba(102, 126, 234, 0.4);
+}
+
+.screenshot-icon svg {
+  width: 20px;
+  height: 20px;
+  fill: #667eea;
+}
+
 /* 전체화면 버튼 */
 .fullscreen-icon {
   position: fixed;
