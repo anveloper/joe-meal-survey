@@ -83,10 +83,18 @@ body {
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  border: 3px solid transparent;
+  border: none;
   cursor: pointer;
   transition: all 0.3s;
   position: relative;
+  overflow: hidden;
+  padding: 0;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-size: 200% 200%;
+  background-position: center;
 }
 
 .color-btn:hover {
@@ -95,7 +103,7 @@ body {
 }
 
 .color-btn.active {
-  border-color: #333;
+  border: 1px solid #4961ff;
   transform: scale(1.15);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
 }
@@ -113,7 +121,7 @@ body {
 }
 
 .color-btn:nth-child(1) {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
 }
 .color-btn:nth-child(2) {
   background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
@@ -131,7 +139,7 @@ body {
   background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);
 }
 .color-btn:nth-child(7) {
-  background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
 @media (max-width: 768px) {

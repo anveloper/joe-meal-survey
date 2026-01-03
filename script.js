@@ -3,7 +3,7 @@ let menuName = "";
 let password = "";
 let yesVotes = 0;
 let noVotes = 0;
-let selectedGradient = "linear-gradient(135deg, #667eea 0%, #764ba2 100%)"; // 기본 그라데이션
+let selectedGradient = "linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)"; // 기본 그라데이션
 
 // localStorage 키
 const STORAGE_KEYS = {
@@ -79,7 +79,7 @@ function resetAllData() {
   password = "";
   yesVotes = 0;
   noVotes = 0;
-  selectedGradient = "linear-gradient(135deg, #667eea 0%, #764ba2 100%)";
+  selectedGradient = "linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)";
 
   // 배경색 초기화
   document.body.style.background = selectedGradient;
